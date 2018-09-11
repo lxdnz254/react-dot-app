@@ -10,6 +10,10 @@ using react_dot_app.Models;
 
 namespace react_dot_app.Db 
 {
+    /// .summary
+    /// Static class for performing Database queries using a Neo4j GraphDB
+    /// Queries are written in "Cypher" language and use Neo4jClient package
+    /// as the connector.
     public static class Neo4jDb
     {
         private static readonly string user = DbConfigurationManager.DbSetting["Neo4j:User"];

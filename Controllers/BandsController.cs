@@ -13,25 +13,29 @@ namespace react_dot_app.Controllers
     public class BandsController: ControllerBase
     {
 
+        //* /api/bands */
         [HttpGet]
         public IEnumerable<Band> GetAll()
         {
             return Neo4jDb.GetAllBands();  
         }
 
+
+        //* /api/bands/{name} */
         [HttpGet("{name}", Name = "GetBandByName")]
         public IEnumerable<Band> GetBandByName(string name)
         {
             return Neo4jDb.GetBandsByName(name);
         }
 
-        
+        //* /api/bands/rating/1-9 */
         [HttpGet("[action]/{rating}")]
         public IEnumerable<Band> Rating(int rating)
         {
             return Neo4jDb.GetBandsByRating(rating);
         }
 
+        //* /api/bands/genre/{genre} */
         [HttpGet("[action]/{genre}")]
         public IEnumerable<Band> Genre(string genre)
         {
