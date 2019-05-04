@@ -31,5 +31,16 @@ namespace react_dot_app.Db
                 .Return(genre => genre.As<Genre>())
                 .Results;
         }
+
+        public static IEnumerable<Genre> GetGenresByVenue(string venueName)
+        {
+            Client.Connect();
+            return Client.Cypher
+                .Match("(genre:Genre)-[:LIKES_GENRES]-(venue:Venue)")
+                .Where("(venue.name) = {name}")
+                .WithParam("name", venueName)
+                .Return(genre => genre.As<Genre>())
+                .Results;
+        }
     }
 }

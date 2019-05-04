@@ -14,16 +14,25 @@ namespace react_dot_app.Controllers
     {
         //* /api/genres */ 
         [HttpGet]
-        public IEnumerable<Genre> GetAll()
+        public IEnumerable<Genre> GetAll(
+            [FromQuery] string band = "",
+            [FromQuery] string venue = ""
+        )
         {
+            if (band != "") return GetGenresByBand(band);
+            if (venue != "") return GetGenresByVenue(venue);
+            
             return Neo4jGenre.GetAllGenres();
         }
 
-        //* /api/genres/{band} */
-        [HttpGet("{band}", Name = "GetGenresByBand")]
         public IEnumerable<Genre> GetGenresByBand(string band)
         {
             return Neo4jGenre.GetGenresByBand(band);
+        }
+
+        public IEnumerable<Genre> GetGenresByVenue(string venue)
+        {
+            return Neo4jGenre.GetGenresByVenue(venue);
         }
     }
 }
